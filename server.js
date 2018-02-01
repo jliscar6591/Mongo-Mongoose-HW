@@ -8,6 +8,7 @@ var logger = require('morgan'); // for debugging
 var request = require('request'); // for web-scraping
 var cheerio = require('cheerio'); // for web-scraping
 
+mongoose.Promise = Promise;
 
 // Initialize Express for debugging & body parsing
 var app = express();
@@ -27,10 +28,10 @@ app.set('view engine', 'handlebars');
 // Database Configuration with Mongoose
 // ---------------------------------------------------------------------------------------------------------------
 // Database configuration with mongoose
-mongoose.connect("mongodb://heroku_x9kk8731:MS7Ps865ULhfCR-M-rnTUoKanJxT3jWE@ds121268.mlab.com:21268/heroku_x9kk8731");
-
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 var db = mongoose.connection;
 
