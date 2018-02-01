@@ -8,7 +8,7 @@ $(document).ready(function () {
     $(".showComment").click(function () {
   
       var currComment = $(this).closest("div").siblings(".comments");
-      //$(this).closest("div").siblings(".comments").toggle();
+      
   
       $(currComment).toggle();
   
@@ -81,7 +81,6 @@ $(document).ready(function () {
           .done(function (data) {
   
             if (data.comments) {
-              console.log(data.comments[0].author);
   
               var commentHtml = "<div class=\"mdl-card__supporting-text mdl-card--border\"><div class=\"comment-body\">" +
                 "<strong>" + data.comments[data.comments.length - 1].author + "</strong><p>" +
