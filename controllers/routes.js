@@ -23,7 +23,6 @@ router.get("/",function(req,res){
     }
     // Otherwise, send the doc to the browser as a json object
     else {
-      console.log("all article with comments: "+ doc);
       res.render("index",{articles: doc});
     }
   });

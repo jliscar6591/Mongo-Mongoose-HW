@@ -3,8 +3,6 @@
     min-height: 20%;
   }
 .mdl-layout__header, .mdl-layout__drawer-button {
-    /* This background is dark, so we set text to white. Use 87% black instead if
-       your background is light. */
     color: rgb(250, 248, 248);
     left: 20px;
   }
