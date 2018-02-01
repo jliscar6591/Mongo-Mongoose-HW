@@ -48,22 +48,19 @@ router.get("/scrape", function(req, res) {
           
         
           // Select each element in the HTML body from which you want information.
-          // NOTE: Cheerio selectors function similarly to jQuery's selectors,
-          // but be sure to visit the package's npm page to see how it works
           $(".has-image").each(function(i, element) {
         
             var result ={};
-            //console.log("has image, chilrend title link: "+ $(element).children(".item-info").children(".title").children().attr("href"));
             result.link = $(element).children(".item-info").children(".title").children().attr("href");
       
             result.title =$(element).children(".item-info").children(".title").children().text();
             result.snipText=$(element).children(".item-info").children(".teaser").children("a").text();
             result.imageLink = $(element).children(".item-image").children(".imagewrap").children("a").children("img").attr("src");
-            //console.log("image linke:" + $(element).children(".item-image").children(".imagewrap").children("a").children("img"));
+            
             
 
             Article.findOne({title:result.title},function(err,data){
-                //console.log("find article "+data);
+                
                 if (!data)
                 {
                     var entry = new Article(result);
@@ -87,29 +84,22 @@ router.get("/scrape", function(req, res) {
                 }
             });
         
-            // Save these results in an object that we'll push into the results array we defined earlier
-        //     results.push({
-        //       title: title,
-        //       link: link,
-        //       imageLink: imageLink
-        //     });
+      
         });
       
           $(".no-image").each(function(i, element) {
             
             var result ={};
-            //console.log("has image, teaser: "+ $(element).children(".item-info").children(".teaser").children("a").text());
+            
                result.link = $(element).children(".item-info").children(".title").children().attr("href");
           
                 result.title =$(element).children(".item-info").children(".title").children("a").text();
                 result.snipText=$(element).children(".item-info").children(".teaser").children().text();
                 result.imageLink="no image";
-               // var imageLink = $(element).children(".item-image").children(".imagewrap").children("a").children("img").attr("src");
-                //console.log("image linke:" + $(element).children(".item-image").children(".imagewrap").children("a").children("img"));
-                //console.log("curr result: "+ JSON.stringify(result));
+               
 
                 Article.findOne({title:result.title},function(err,data){
-                    //console.log("find article "+data);
+                    
                     if (!data)
                     {
                         var entry = new Article(result);
@@ -135,13 +125,10 @@ router.get("/scrape", function(req, res) {
 
               });
       
-        // Log the results once you've looped through each of the elements found with cheerio
-       // console.log(results);
-        //console.log("num articles: " + results.length);
+   
         res.redirect("/");
       });
-    // Tell the browser that we finished scraping the text
-    //res.send("Scrape Complete");
+  
     
   });
 
